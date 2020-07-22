@@ -1,0 +1,160 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "doc_demo",
+    "version": "1.0",
+    "contact": {
+      "name": "Nathan Buring",
+      "url": "nathanisthebest.com",
+      "email": "nburing@norampartners.com"
+    },
+    "termsOfService": "termsofservicebutnotreally.com",
+    "description": "Demo for Stoplight documentation"
+  },
+  "servers": [
+    {
+      "url": "http://documentation_demo.tom:18001/api"
+    },
+    {
+      "url": "http://docdemo.noram.dev"
+    }
+  ],
+  "paths": {
+    "/items/{item}": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Item"
+                    }
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "name": "Item Test 1",
+                      "description": "This is a test description of item 1",
+                      "price": 1.23,
+                      "cost": 2.34
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-item",
+        "description": "Get an individual item."
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "item",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "patch": {
+        "summary": "",
+        "operationId": "patch-items-item",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "operationId": "delete-items-item",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/items": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-items"
+      },
+      "post": {
+        "summary": "",
+        "operationId": "post-items",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Item"
+              },
+              "examples": {
+                "example-1": {}
+              }
+            }
+          },
+          "description": ""
+        },
+        "description": "",
+        "parameters": []
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Item": {
+        "title": "Item",
+        "type": "object",
+        "x-examples": {
+          "item-1": {
+            "name": "Item Test 1",
+            "description": "This is a test description of item 1",
+            "price": 1.23,
+            "cost": 2.34
+          }
+        },
+        "description": "The item represents information used to sell products on your store.",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the item."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the item."
+          },
+          "price": {
+            "type": "number",
+            "description": "Customer price for the item."
+          },
+          "cost": {
+            "type": "number",
+            "description": "Vendor cost of the item."
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "price",
+          "cost"
+        ]
+      }
+    },
+    "securitySchemes": {}
+  }
+}
